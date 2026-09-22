@@ -52,28 +52,17 @@ st.title("영화 데이터 분석")
 
 # 기존 첫 번째 그래프가 있는 부분은 그대로 두기
 
-
-# =========================
 # 두 번째 그래프: 장르별 영화 트리맵
-# =========================
 st.subheader("장르별 영화 총 관객 트리맵")
 
 fig2 = px.treemap(
     df,
     path=["genre", "movieNm"],
-    values="total_audi",
-    hover_data={
-        "movieNm": True,
-        "total_audi": ":,",
-    }
+    values="total_audi"
 )
 
 fig2.update_traces(
     hovertemplate="<b>%{label}</b><br>총 관객: %{value:,}명<extra></extra>"
-)
-
-fig2.update_layout(
-    margin=dict(t=30, l=10, r=10, b=10)
 )
 
 st.plotly_chart(fig2, use_container_width=True)
