@@ -40,29 +40,3 @@ st.text_input("이 그래프로 알 수 있는 것", key="note1")
 st.divider()
 # 앞으로 그래프를 계속 추가할 구역
 st.header("2. (다음 그래프를 여기에 추가)")
-
-import streamlit as st
-import pandas as pd
-import plotly.express as px
-
-# 데이터 불러오기
-df = pd.read_csv("data.csv")
-
-st.title("영화 데이터 분석")
-
-# 기존 첫 번째 그래프가 있는 부분은 그대로 두기
-
-# 두 번째 그래프: 장르별 영화 트리맵
-st.subheader("장르별 영화 총 관객 트리맵")
-
-fig2 = px.treemap(
-    df,
-    path=["genre", "movieNm"],
-    values="total_audi"
-)
-
-fig2.update_traces(
-    hovertemplate="<b>%{label}</b><br>총 관객: %{value:,}명<extra></extra>"
-)
-
-st.plotly_chart(fig2, use_container_width=True)
