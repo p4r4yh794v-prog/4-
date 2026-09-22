@@ -40,3 +40,29 @@ st.text_input("이 그래프로 알 수 있는 것", key="note1")
 st.divider()
 # 앞으로 그래프를 계속 추가할 구역
 st.header("2. (다음 그래프를 여기에 추가)")
+# 2. 장르 → 영화 트리맵
+st.subheader("2. 장르별 영화 총 관객 수 트리맵")
+
+fig = px.treemap(
+    df,
+    path=["genre", "movieNm"],
+    values="total_audi",
+    color="genre",
+    hover_name="movieNm",
+    hover_data={
+        "total_audi": ":,",
+        "genre": True
+    },
+    labels={
+        "genre": "장르",
+        "movieNm": "영화",
+        "total_audi": "총 관객 수"
+    },
+    title="장르별 영화 총 관객 수"
+)
+
+fig.update_traces(
+    hovertemplate="<b>%{label}</b><br>총 관객: %{value:,.0f}명<extra></extra>"
+)
+
+st.plotly_chart(fig, use_container_width=True)
